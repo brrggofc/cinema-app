@@ -32,3 +32,21 @@
 .movie-date-time {
   margin: 0.3rem 0;
 }
+
+@media (max-width: 600px) {
+  .movie-title {
+    font-size: 1rem;
+  }
+
+  .movie-description {
+    font-size: 0.9rem;
+  }
+
+  .movie-card {
+    border-radius: 8px;
+  }
+
+  .movie-info {
+    padding: 0.8rem;
+  }
+}
