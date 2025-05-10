@@ -50,3 +50,39 @@
     padding: 0.8rem;
   }
 }
+
+.movie-card {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(255, 255, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  color: #f4f4f4;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(255, 255, 0, 0.5);
+}
+
+.movie-title {
+  color: #ffd700; /* жовтий */
+  margin-bottom: 0.5rem;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-genre strong,
+.movie-date-time strong {
+  color: #ffd700;
+}

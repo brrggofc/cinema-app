@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MovieList from './components/MovieList';
 import moviesData from './data/movies';
-import './App.css'; // якщо є
+import './index.css'; // глобальні стилі (фон, шрифт тощо)
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,8 +11,24 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <h1 style={{ textAlign: 'center', marginTop: '2rem' }}>Список фільмів</h1>
+    <div
+      className="App"
+      style={{
+        backgroundColor: '#0d0d0d',
+        minHeight: '100vh',
+        paddingBottom: '2rem'
+      }}
+    >
+      <h1
+        style={{
+          textAlign: 'center',
+          marginTop: '2rem',
+          color: '#ffd700',
+          fontWeight: 'bold'
+        }}
+      >
+        Список фільмів
+      </h1>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <input
@@ -24,8 +40,11 @@ function App() {
             padding: '10px',
             fontSize: '16px',
             borderRadius: '8px',
-            border: '1px solid #ccc',
-            width: '250px'
+            border: '2px solid #ffd700',
+            backgroundColor: '#1a1a1a',
+            color: '#fff',
+            width: '250px',
+            outline: 'none'
           }}
         />
       </div>
