@@ -4,7 +4,7 @@ const movies = [
     title: "Інтерстеллар",
     description: "Космічна епопея про подорож у часі й просторі.",
     genre: "Фантастика",
-    poster: "https://via.placeholder.com/200x300?text=Interstellar",
+    poster: "/images/interstellar.jpg",
     date: "2025-05-12",
     time: "18:00"
   },
@@ -13,7 +13,7 @@ const movies = [
     title: "Темний лицар",
     description: "Бетмен проти Джокера в боротьбі за місто Ґотем.",
     genre: "Бойовик",
-    poster: "https://via.placeholder.com/200x300?text=Dark+Knight",
+    poster: "/images/dark-knight.jpg",
     date: "2025-05-12",
     time: "20:30"
   },
@@ -22,7 +22,7 @@ const movies = [
     title: "Початок",
     description: "Світ снів і підсвідомості з безліччю рівнів.",
     genre: "Трилер",
-    poster: "https://via.placeholder.com/200x300?text=Inception",
+    poster: "/images/inception.jpg",
     date: "2025-05-13",
     time: "21:00"
   }
