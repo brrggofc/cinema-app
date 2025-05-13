@@ -1,0 +1,32 @@
+.hall {
+  display: grid;
+  grid-template-columns: repeat(8, 40px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: green;
+  transition: 0.3s;
+}
+
+.seat.selected {
+  background-color: blue;
+}
+
+@media (max-width: 600px) {
+  .hall {
+    grid-template-columns: repeat(4, 30px);
+    gap: 8px;
+  }
+
+  .seat {
+    width: 30px;
+    height: 30px;
+  }
+}
