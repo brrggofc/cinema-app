@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CinemaHall.css';
 import { useParams } from 'react-router-dom';
 import { BookingService } from '../services/BookingService';
@@ -9,6 +9,7 @@ const COLS = 8;
 
 function CinemaHall() {
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -17,7 +18,14 @@ function CinemaHall() {
   const { id } = useParams();
   const movieId = parseInt(id);
 
+  // Завантаження вже заброньованих місць
+  useEffect(() => {
+    const booked = BookingService.getBookedSeatsByMovieId(movieId);
+    setBookedSeats(booked);
+  }, [movieId]);
+
   const toggleSeat = (index) => {
+    if (bookedSeats.includes(index)) return;
     setSelectedSeats((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
@@ -46,6 +54,7 @@ function CinemaHall() {
     });
 
     toast.success('Бронювання збережено!');
+    setBookedSeats((prev) => [...prev, ...selectedSeats]);
     setSelectedSeats([]);
     setShowForm(false);
     setName('');
@@ -62,10 +71,13 @@ function CinemaHall() {
             {Array.from({ length: COLS }).map((_, colIndex) => {
               const index = rowIndex * COLS + colIndex;
               const isSelected = selectedSeats.includes(index);
+              const isBooked = bookedSeats.includes(index);
               return (
                 <div
                   key={index}
-                  className={`seat ${isSelected ? 'selected' : 'available'}`}
+                  className={`seat ${
+                    isBooked ? 'booked' : isSelected ? 'selected' : 'available'
+                  }`}
                   onClick={() => toggleSeat(index)}
                 >
                   {colIndex + 1}

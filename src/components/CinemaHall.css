@@ -50,3 +50,11 @@
     font-size: 12px;
   }
 }
+
+.seat.booked {
+  background-color: #c0392b;
+  border: 2px solid #e74c3c;
+  cursor: not-allowed;
+  color: #fff;
+  opacity: 0.8;
+}
