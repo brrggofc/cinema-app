@@ -1,26 +1,24 @@
-// Сервіс для роботи з бронюванням квитків
-
-const STORAGE_KEY = 'bookings';
+const BOOKING_KEY = 'cinema-bookings';
 
 export const BookingService = {
-  getBookedSeats(movieId) {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    return data[movieId] || [];
+  // Отримати всі бронювання
+  getAllBookings: () => {
+    const data = localStorage.getItem(BOOKING_KEY);
+    return data ? JSON.parse(data) : [];
   },
 
-  saveBooking(movieId, selectedSeats, userData) {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    const previousSeats = data[movieId] || [];
+  // Отримати заброньовані місця для конкретного фільму
+  getBookedSeatsByMovieId: (movieId) => {
+    const bookings = BookingService.getAllBookings();
+    return bookings
+      .filter(b => b.movieId === movieId)
+      .flatMap(b => b.seats);
+  },
 
-    const updatedSeats = [...new Set([...previousSeats, ...selectedSeats])];
-
-    data[movieId] = updatedSeats;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-
-    console.log('Бронювання збережено:', {
-      movieId,
-      seats: updatedSeats,
-      user: userData,
-    });
+  // Зберегти нове бронювання
+  saveBooking: (booking) => {
+    const bookings = BookingService.getAllBookings();
+    bookings.push(booking); // додаємо нове бронювання
+    localStorage.setItem(BOOKING_KEY, JSON.stringify(bookings));
   }
 };
