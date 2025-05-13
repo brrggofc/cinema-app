@@ -7,7 +7,7 @@ function MovieCard({ movie }) {
 
   return (
     <div className="movie-card">
-      <img src={movie.image} alt={movie.title} className="movie-image" />
+      <img src={movie.poster} alt={movie.title} className="movie-image" />
       <h3>{movie.title}</h3>
       <p>{movie.description}</p>
       <button
