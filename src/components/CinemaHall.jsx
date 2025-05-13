@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CinemaHall.css'; // стилі напишемо окремо
+import './CinemaHall.css';
 
 const ROWS = 5;
 const COLS = 8;
@@ -9,25 +9,50 @@ function CinemaHall() {
 
   const toggleSeat = (index) => {
     setSelectedSeats((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
+  const getSeatLabel = (index) => {
+    const row = Math.floor(index / COLS) + 1;
+    const col = (index % COLS) + 1;
+    return `Ряд ${row}, місце ${col}`;
+  };
+
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <div className="hall">
-        {[...Array(ROWS * COLS)].map((_, i) => (
-          <div
-            key={i}
-            className={`seat ${selectedSeats.includes(i) ? 'selected' : 'available'}`}
-            onClick={() => toggleSeat(i)}
-          />
+        {Array.from({ length: ROWS }).map((_, rowIndex) => (
+          <div key={rowIndex} className="row">
+            <div className="row-label">Ряд {rowIndex + 1}</div>
+            {Array.from({ length: COLS }).map((_, colIndex) => {
+              const index = rowIndex * COLS + colIndex;
+              const isSelected = selectedSeats.includes(index);
+              return (
+                <div
+                  key={index}
+                  className={`seat ${isSelected ? 'selected' : 'available'}`}
+                  onClick={() => toggleSeat(index)}
+                >
+                  {colIndex + 1}
+                </div>
+              );
+            })}
+          </div>
         ))}
       </div>
+
       <p style={{ marginTop: '1rem' }}>
-        Вибрані місця: {selectedSeats.length > 0 ? selectedSeats.join(', ') : 'немає'}
+        Вибрані місця:{' '}
+        {selectedSeats.length > 0
+          ? selectedSeats
+              .map((index) => {
+                const row = Math.floor(index / COLS) + 1;
+                const col = (index % COLS) + 1;
+                return `Ряд ${row}, місце ${col}`;
+              })
+              .join('; ')
+          : 'немає'}
       </p>
     </div>
   );
